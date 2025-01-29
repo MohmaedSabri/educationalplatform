@@ -1,0 +1,12 @@
+E:\abdallaAli\backend\MyBackend\Models\bin\Debug\net8.0\Models.deps.json
+E:\abdallaAli\backend\MyBackend\Models\bin\Debug\net8.0\Models.dll
+E:\abdallaAli\backend\MyBackend\Models\bin\Debug\net8.0\Models.pdb
+E:\abdallaAli\backend\MyBackend\Models\obj\Debug\net8.0\Models.csproj.AssemblyReference.cache
+E:\abdallaAli\backend\MyBackend\Models\obj\Debug\net8.0\Models.GeneratedMSBuildEditorConfig.editorconfig
+E:\abdallaAli\backend\MyBackend\Models\obj\Debug\net8.0\Models.AssemblyInfoInputs.cache
+E:\abdallaAli\backend\MyBackend\Models\obj\Debug\net8.0\Models.AssemblyInfo.cs
+E:\abdallaAli\backend\MyBackend\Models\obj\Debug\net8.0\Models.csproj.CoreCompileInputs.cache
+E:\abdallaAli\backend\MyBackend\Models\obj\Debug\net8.0\Models.dll
+E:\abdallaAli\backend\MyBackend\Models\obj\Debug\net8.0\refint\Models.dll
+E:\abdallaAli\backend\MyBackend\Models\obj\Debug\net8.0\Models.pdb
+E:\abdallaAli\backend\MyBackend\Models\obj\Debug\net8.0\ref\Models.dll

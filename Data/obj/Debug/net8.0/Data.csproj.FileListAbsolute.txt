@@ -1,0 +1,17 @@
+E:\abdallaAli\backend\MyBackend\Data\bin\Debug\net8.0\Data.deps.json
+E:\abdallaAli\backend\MyBackend\Data\bin\Debug\net8.0\Data.runtimeconfig.json
+E:\abdallaAli\backend\MyBackend\Data\bin\Debug\net8.0\Data.dll
+E:\abdallaAli\backend\MyBackend\Data\bin\Debug\net8.0\Data.pdb
+E:\abdallaAli\backend\MyBackend\Data\bin\Debug\net8.0\models.dll
+E:\abdallaAli\backend\MyBackend\Data\bin\Debug\net8.0\models.pdb
+E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\Data.csproj.AssemblyReference.cache
+E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\Data.GeneratedMSBuildEditorConfig.editorconfig
+E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\Data.AssemblyInfoInputs.cache
+E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\Data.AssemblyInfo.cs
+E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\Data.csproj.CoreCompileInputs.cache
+E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\Data.csproj.Up2Date
+E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\Data.dll
+E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\refint\Data.dll
+E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\Data.pdb
+E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\Data.genruntimeconfig.cache
+E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\ref\Data.dll
