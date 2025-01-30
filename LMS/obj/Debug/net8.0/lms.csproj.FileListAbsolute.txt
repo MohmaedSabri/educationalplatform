@@ -159,3 +159,5 @@ E:\abdallaAli\backend\MyBackend\LMS\obj\Debug\net8.0\lms.genruntimeconfig.cache
 E:\abdallaAli\backend\MyBackend\LMS\obj\Debug\net8.0\ref\lms.dll
 E:\abdallaAli\backend\MyBackend\LMS\bin\Debug\net8.0\AutoMapper.dll
 E:\abdallaAli\backend\MyBackend\LMS\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+E:\abdallaAli\backend\MyBackend\lms\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\abdallaAli\backend\MyBackend\lms\obj\Debug\net8.0\lms.sourcelink.json

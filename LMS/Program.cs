@@ -1,7 +1,10 @@
+using System.Text;
 using System.Text.Json.Serialization;
 using data;
+using lms.AuthenticationServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using models.AutoMapper;
 using models.Model;
 
@@ -29,9 +32,27 @@ builder.Services.AddIdentity<AppUser,Role>(
         options.Password.RequireNonAlphanumeric = true;
         options.Password.RequiredLength = 8;
 
-        options.SignIn.RequireConfirmedAccount = true;
     }
 ).AddEntityFrameworkStores<AppDbContext>().AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider);
+
+builder.Services.AddAuthentication(
+    options => {
+        options.DefaultAuthenticateScheme = "Bearer";
+        options.DefaultChallengeScheme = "Bearer"; 
+     }
+).AddJwtBearer(
+    options => options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    }
+);
+builder.Services.AddScoped<IAuthenticationService,Authentication>();
 
 
 builder.Services.AddDbContext<AppDbContext>(

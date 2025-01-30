@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "E:\\abdallaAli\\backend\\MyBackend\\LMS\\lms.csproj": {}
+    "E:\\abdallaAli\\backend\\MyBackend\\lms\\lms.csproj": {}
   },
   "projects": {
     "E:\\abdallaAli\\backend\\MyBackend\\Data\\data.csproj": {
@@ -88,14 +88,14 @@
         }
       }
     },
-    "E:\\abdallaAli\\backend\\MyBackend\\LMS\\lms.csproj": {
+    "E:\\abdallaAli\\backend\\MyBackend\\lms\\lms.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\abdallaAli\\backend\\MyBackend\\LMS\\lms.csproj",
+        "projectUniqueName": "E:\\abdallaAli\\backend\\MyBackend\\lms\\lms.csproj",
         "projectName": "lms",
-        "projectPath": "E:\\abdallaAli\\backend\\MyBackend\\LMS\\lms.csproj",
+        "projectPath": "E:\\abdallaAli\\backend\\MyBackend\\lms\\lms.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "E:\\abdallaAli\\backend\\MyBackend\\LMS\\obj\\",
+        "outputPath": "E:\\abdallaAli\\backend\\MyBackend\\lms\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -134,6 +134,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.12, )"
