@@ -29,35 +29,21 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
        return  await _dbSet.ToListAsync();
     }
 
-    public async Task<TEntity> GetByUuIdAsync(Guid uuid, string[] include = null)
-    {
+    public async Task<TEntity> GetByIdAsync(Guid uuid, string[] include = null)
+{
+    IQueryable<TEntity> query = _dbSet.AsQueryable();
 
-        TEntity entity = await _dbSet.FindAsync(uuid);
-        if(entity == null){
-            return null;
+    if (include != null)
+    {
+        foreach (var includeProperty in include)
+        {
+            query = query.Include(includeProperty); // ✅ Use Include correctly
         }
-        if(include != null){
-            foreach(var includeProp in include){
-                _context.Entry(entity).Reference(includeProp).Load();
-            }
-        }
-        return entity;
     }
 
-    public async Task<TEntity> GetByIdAsync(int id, string[] include = null)
-    {
-        TEntity entity = await _dbSet.FindAsync(id);
-        if(entity == null){
-            return null;
-        }
-        if(include != null){
-            foreach(var includeProp in include){
-                _context.Entry(entity).Reference(includeProp).Load();
-            }
-        }
+    return await query.FirstOrDefaultAsync(e => EF.Property<Guid>(e, "Id") == uuid);
+}
 
-        return entity;
-    }
 
     public Task<bool> UpdateAsync(TEntity entity)
     {

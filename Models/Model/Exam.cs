@@ -12,6 +12,6 @@ public class Exam
     public Guid CourseId { get; set; }
     virtual public Course Course { get; set; }
 
-    virtual public ICollection<Question> Questions { get; set; }
+    virtual public List<Question> Questions { get; set; }
 
 }
