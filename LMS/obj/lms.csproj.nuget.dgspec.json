@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "E:\\abdallaAli\\backend\\MyBackend\\lms\\lms.csproj": {}
+    "E:\\abdallaAli\\backend\\MyBackend\\LMS\\lms.csproj": {}
   },
   "projects": {
     "E:\\abdallaAli\\backend\\MyBackend\\Data\\data.csproj": {
@@ -88,14 +88,14 @@
         }
       }
     },
-    "E:\\abdallaAli\\backend\\MyBackend\\lms\\lms.csproj": {
+    "E:\\abdallaAli\\backend\\MyBackend\\LMS\\lms.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\abdallaAli\\backend\\MyBackend\\lms\\lms.csproj",
+        "projectUniqueName": "E:\\abdallaAli\\backend\\MyBackend\\LMS\\lms.csproj",
         "projectName": "lms",
-        "projectPath": "E:\\abdallaAli\\backend\\MyBackend\\lms\\lms.csproj",
+        "projectPath": "E:\\abdallaAli\\backend\\MyBackend\\LMS\\lms.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "E:\\abdallaAli\\backend\\MyBackend\\lms\\obj\\",
+        "outputPath": "E:\\abdallaAli\\backend\\MyBackend\\LMS\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config"

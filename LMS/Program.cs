@@ -53,7 +53,8 @@ builder.Services.AddAuthentication(
     }
 );
 builder.Services.AddScoped<IAuthenticationService,Authentication>();
-
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
 
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlServer(builder.Configuration.
@@ -68,9 +69,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseRouting();
+
 app.MapControllers();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseHttpsRedirection();
+
 
 app.Run();

@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using AutoMapper;
 using lms.AuthenticationServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ namespace lms.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class AccountController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -73,6 +75,7 @@ namespace lms.Controllers
             user.RefreshToken = _authenticationService.GenerateRefreshToken();
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(14);
             var result = await _userManager.CreateAsync(user, registerDTO.Password);
+            result = await _userManager.AddToRoleAsync(user, "Student");
             if(result.Succeeded){
                 RequestLoginDTO loginDTO = new RequestLoginDTO(){
                     Email = registerDTO.Email,

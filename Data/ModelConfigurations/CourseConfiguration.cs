@@ -13,6 +13,9 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
         builder.Property(c => c.Title).IsRequired().HasMaxLength(50);
         builder.Property(c => c.Description).IsRequired();
         builder.Property(c => c.StartDate).IsRequired();
+        builder.Property(c => c.EndDate).IsRequired();
+        builder.Property(c => c.ImageUrl).IsRequired();
+        builder.Property(c => c.Price).IsRequired().HasColumnType("decimal(18, 2)");
         builder.HasIndex(c => c.Id).IsUnique();
     }
 }

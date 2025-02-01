@@ -13,6 +13,13 @@ public class Course
 
     public DateTime StartDate { get; set; }
 
+    public DateTime EndDate { get; set; }
+
+    public string ImageUrl { get; set; }
+
+    public decimal Price { get; set; }
+ 
+    public int Year { get; set; }
     public virtual List<Lesson> Lessons { get; set; }
 
     public virtual List<StudentCourse> StudentCourses { get; set; }

@@ -9,5 +9,10 @@ public class AddExamDTO
     public string Title { get; set; }
 
     [Required]
-    public DateTime Date { get; set; }
+    public DateTime StartDate { get; set; }
+
+    [Required]
+    public int DurationInMinutes { get; set; }
+
+
 }

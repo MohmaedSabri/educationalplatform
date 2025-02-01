@@ -12,8 +12,8 @@ using data;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250128214839_intialmigration")]
-    partial class intialmigration
+    [Migration("20250201115300_inttialmigration")]
+    partial class inttialmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -220,10 +220,9 @@ namespace Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("RefreshToken")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                    b.Property<DateTime?>("RefreshTokenExpiryTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SecurityStamp")
@@ -293,6 +292,16 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -318,7 +327,10 @@ namespace Data.Migrations
                     b.Property<Guid>("CourseId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<int>("DurationInMinutes")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("StudentId")
@@ -342,6 +354,30 @@ namespace Data.Migrations
                     b.ToTable("Exams");
                 });
 
+            modelBuilder.Entity("models.Model.ExamSession", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ExamId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("ExamSession");
+                });
+
             modelBuilder.Entity("models.Model.Lesson", b =>
                 {
                     b.Property<Guid>("Id")
@@ -354,7 +390,7 @@ namespace Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 28, 23, 48, 38, 690, DateTimeKind.Local).AddTicks(964));
+                        .HasDefaultValue(new DateTime(2025, 2, 1, 13, 52, 59, 908, DateTimeKind.Local).AddTicks(5305));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -493,6 +529,26 @@ namespace Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c5bbf96a-91a3-4400-9e5c-0d9e55c32fb1"),
+                            Name = "Student",
+                            NormalizedName = "STUDENT"
+                        },
+                        new
+                        {
+                            Id = new Guid("a080ec18-cb7e-4ca5-ac27-2ace4bdeecf3"),
+                            Name = "Assistant",
+                            NormalizedName = "ASSISTANT"
+                        },
+                        new
+                        {
+                            Id = new Guid("0737dc88-4f26-4f63-a97c-43861a4e1663"),
+                            Name = "Teacher",
+                            NormalizedName = "TEACHER"
+                        });
                 });
 
             modelBuilder.Entity("models.Model.StudentCourse", b =>
@@ -665,15 +721,32 @@ namespace Data.Migrations
                 {
                     b.HasOne("models.Model.Course", "Course")
                         .WithOne("Exam")
-                        .HasForeignKey("models.Model.Exam", "CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("models.Model.Exam", "CourseId");
 
                     b.HasOne("models.Model.Student", null)
                         .WithMany("Exams")
                         .HasForeignKey("StudentId");
 
                     b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("models.Model.ExamSession", b =>
+                {
+                    b.HasOne("models.Model.Exam", "Exam")
+                        .WithMany("ExamSessions")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("models.Model.Student", "Student")
+                        .WithMany("ExamSessions")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exam");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("models.Model.Lesson", b =>
@@ -763,6 +836,8 @@ namespace Data.Migrations
 
             modelBuilder.Entity("models.Model.Exam", b =>
                 {
+                    b.Navigation("ExamSessions");
+
                     b.Navigation("Questions");
                 });
 
@@ -776,6 +851,8 @@ namespace Data.Migrations
             modelBuilder.Entity("models.Model.Student", b =>
                 {
                     b.Navigation("Answers");
+
+                    b.Navigation("ExamSessions");
 
                     b.Navigation("Exams");
 

@@ -10,3 +10,4 @@ E:\abdallaAli\backend\MyBackend\Models\obj\Debug\net8.0\Models.dll
 E:\abdallaAli\backend\MyBackend\Models\obj\Debug\net8.0\refint\Models.dll
 E:\abdallaAli\backend\MyBackend\Models\obj\Debug\net8.0\Models.pdb
 E:\abdallaAli\backend\MyBackend\Models\obj\Debug\net8.0\ref\Models.dll
+E:\abdallaAli\backend\MyBackend\Models\obj\Debug\net8.0\models.sourcelink.json

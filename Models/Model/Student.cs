@@ -14,6 +14,8 @@ public class Student : AppUser
    public string ParentPhone{ get; set; }
     public virtual List<Course> Courses{ get; set; }
 
+    public virtual List<ExamSession> ExamSessions{ get; set; }
+
     public virtual List<Exam> Exams{ get; set; }
 
     public virtual List<StudentCourse> StudentCourses{ get; set; }

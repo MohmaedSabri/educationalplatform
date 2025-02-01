@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jTVtfCyFi10=",
+  "dgSpecHash": "bTsq67hq0Q8=",
   "success": true,
-  "projectFilePath": "E:\\abdallaAli\\backend\\MyBackend\\lms\\lms.csproj",
+  "projectFilePath": "E:\\abdallaAli\\backend\\MyBackend\\LMS\\lms.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

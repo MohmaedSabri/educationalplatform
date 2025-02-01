@@ -11,12 +11,15 @@ public class ExamConfiguration : IEntityTypeConfiguration<Exam>
     {
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Title).IsRequired().HasMaxLength(50);
-        builder.Property(e => e.Date).IsRequired();
+        builder.Property(e => e.StartDate).IsRequired();
+        builder.Property(e=>e.DurationInMinutes).IsRequired();
 
+        
         builder.HasIndex(e => e.Id).IsUnique();
 
         builder.HasOne(e => e.Course).
             WithOne(c => c.Exam).
-            HasForeignKey<Exam>(e => e.CourseId);
+            HasForeignKey<Exam>(e => e.CourseId)
+            .IsRequired(false);
     }
 }

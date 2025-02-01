@@ -8,7 +8,9 @@ public class ViewExamDTO
 
     public string Title {get;set;}
 
-    public DateTime Date {get;set;}
+    public DateTime StartDate {get;set;}
+
+    public int DurationInMinutes {get;set;}
 
     public List<ViewQuestionDTO> Questions {get;set;}
 

@@ -41,6 +41,14 @@ public class AppDbContext : IdentityDbContext<AppUser,Role,Guid>
         builder.ApplyConfiguration(new ExamConfiguration());
         builder.ApplyConfiguration(new StudentCourseConfiguration());
         builder.ApplyConfiguration(new CouponConfiguration());
+
+        List<Role> roles = new List<Role>{
+            new Role{Id = Guid.NewGuid(), Name = "Student", NormalizedName = "STUDENT" },
+            new Role{Id = Guid.NewGuid(), Name = "Assistant", NormalizedName = "ASSISTANT" },
+            new Role{Id = Guid.NewGuid(), Name = "Teacher", NormalizedName = "TEACHER" }
+        };
+
+        builder.Entity<Role>().HasData(roles);
     }
 
 }

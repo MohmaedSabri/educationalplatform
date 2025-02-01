@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 using AutoMapper;
+using models.DTO.AccountDTO;
 using models.DTO.CoursesDTO;
 using models.DTO.ExamDTO;
 using models.DTO.PaymentDTO;
@@ -32,6 +33,8 @@ public class MappingProfile : Profile
 
 
         CreateMap<Payment, ViewPaymentDTO>().ForMember(dest => dest.CourseName, opt => opt.MapFrom(src => src.Course.Title));
+
+        CreateMap<RequestStudentRegisterDTO, Student>().ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
     }
 
 }

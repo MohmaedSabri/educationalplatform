@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class intialmigration : Migration
+    public partial class inttialmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,8 +32,8 @@ namespace Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RefreshTokenExpiryTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RefreshTokenExpiryTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
                     HireDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
@@ -69,7 +71,10 @@ namespace Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -234,7 +239,8 @@ namespace Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DurationInMinutes = table.Column<int>(type: "int", nullable: false),
                     CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     StudentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
@@ -250,8 +256,7 @@ namespace Data.Migrations
                         name: "FK_Exams_Courses_CourseId",
                         column: x => x.CourseId,
                         principalTable: "Courses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -264,7 +269,7 @@ namespace Data.Migrations
                     VideoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PdfUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsFree = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 28, 23, 48, 38, 690, DateTimeKind.Local).AddTicks(964)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 1, 13, 52, 59, 908, DateTimeKind.Local).AddTicks(5305)),
                     CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -326,6 +331,32 @@ namespace Data.Migrations
                         name: "FK_StudentCourses_Courses_CourseId",
                         column: x => x.CourseId,
                         principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExamSession",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExamId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StudentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExamSession", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ExamSession_AspNetUsers_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ExamSession_Exams_ExamId",
+                        column: x => x.ExamId,
+                        principalTable: "Exams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -393,6 +424,16 @@ namespace Data.Migrations
                         principalTable: "Questions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { new Guid("0737dc88-4f26-4f63-a97c-43861a4e1663"), null, "Teacher", "TEACHER" },
+                    { new Guid("a080ec18-cb7e-4ca5-ac27-2ace4bdeecf3"), null, "Assistant", "ASSISTANT" },
+                    { new Guid("c5bbf96a-91a3-4400-9e5c-0d9e55c32fb1"), null, "Student", "STUDENT" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -490,6 +531,16 @@ namespace Data.Migrations
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ExamSession_ExamId",
+                table: "ExamSession",
+                column: "ExamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExamSession_StudentId",
+                table: "ExamSession",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Lessons_CourseId",
                 table: "Lessons",
                 column: "CourseId");
@@ -564,6 +615,9 @@ namespace Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "CourseStudent");
+
+            migrationBuilder.DropTable(
+                name: "ExamSession");
 
             migrationBuilder.DropTable(
                 name: "Lessons");

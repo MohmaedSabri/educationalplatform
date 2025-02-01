@@ -15,3 +15,4 @@ E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\refint\Data.dll
 E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\Data.pdb
 E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\Data.genruntimeconfig.cache
 E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\ref\Data.dll
+E:\abdallaAli\backend\MyBackend\Data\obj\Debug\net8.0\data.sourcelink.json
