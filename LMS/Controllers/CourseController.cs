@@ -41,8 +41,11 @@ namespace lms.Controllers
             Course course = await courseRepository.GetByIdAsync(id,include: new string[]{"Lessons"});
             foreach (var lesson in course.Lessons)
             {
-                lesson.VideoUrl = null;
-                lesson.PdfUrl = null;
+                if(lesson.IsFree == false){
+                    lesson.VideoUrl = null;
+                    lesson.PdfUrl = null;
+                }
+                
             }
             ViewCourseDTO viewCourse = _mapper.Map<ViewCourseDTO>(course);
             return Ok(viewCourse);

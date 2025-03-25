@@ -12,8 +12,8 @@ using data;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250201115300_inttialmigration")]
-    partial class inttialmigration
+    [Migration("20250316211139_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,6 +122,13 @@ namespace Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("78ab8f66-e864-4e65-bacb-8263595dff66"),
+                            RoleId = new Guid("2751d8aa-1766-4e26-9215-eea8822cea54")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -250,6 +257,24 @@ namespace Data.Migrations
                     b.HasDiscriminator().HasValue("AppUser");
 
                     b.UseTphMappingStrategy();
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("78ab8f66-e864-4e65-bacb-8263595dff66"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "bd1ac2b3-ecef-4fed-89cd-4891ab23ef09",
+                            Email = "Admin@admin.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@ADMIN.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH6j95fBX5W3/3a+gHXrmNNNzTYJMdwkANKlNixSc9IUYTovZ274QCGUJqsWmatReQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("models.Model.Coupon", b =>
@@ -309,6 +334,9 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -390,7 +418,7 @@ namespace Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 1, 13, 52, 59, 908, DateTimeKind.Local).AddTicks(5305));
+                        .HasDefaultValue(new DateTime(2025, 3, 16, 23, 11, 36, 914, DateTimeKind.Local).AddTicks(4599));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -533,19 +561,19 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c5bbf96a-91a3-4400-9e5c-0d9e55c32fb1"),
+                            Id = new Guid("de010548-23e7-4a65-ad58-e6d5a9fd41a3"),
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         },
                         new
                         {
-                            Id = new Guid("a080ec18-cb7e-4ca5-ac27-2ace4bdeecf3"),
+                            Id = new Guid("140bcb5c-f798-4742-bea8-baf339efed54"),
                             Name = "Assistant",
                             NormalizedName = "ASSISTANT"
                         },
                         new
                         {
-                            Id = new Guid("0737dc88-4f26-4f63-a97c-43861a4e1663"),
+                            Id = new Guid("2751d8aa-1766-4e26-9215-eea8822cea54"),
                             Name = "Teacher",
                             NormalizedName = "TEACHER"
                         });

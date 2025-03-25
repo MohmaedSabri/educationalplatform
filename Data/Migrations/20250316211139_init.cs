@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class inttialmigration : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -74,7 +74,8 @@ namespace Data.Migrations
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -269,7 +270,7 @@ namespace Data.Migrations
                     VideoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PdfUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsFree = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 1, 13, 52, 59, 908, DateTimeKind.Local).AddTicks(5305)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 3, 16, 23, 11, 36, 914, DateTimeKind.Local).AddTicks(4599)),
                     CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -431,10 +432,20 @@ namespace Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("0737dc88-4f26-4f63-a97c-43861a4e1663"), null, "Teacher", "TEACHER" },
-                    { new Guid("a080ec18-cb7e-4ca5-ac27-2ace4bdeecf3"), null, "Assistant", "ASSISTANT" },
-                    { new Guid("c5bbf96a-91a3-4400-9e5c-0d9e55c32fb1"), null, "Student", "STUDENT" }
+                    { new Guid("140bcb5c-f798-4742-bea8-baf339efed54"), null, "Assistant", "ASSISTANT" },
+                    { new Guid("2751d8aa-1766-4e26-9215-eea8822cea54"), null, "Teacher", "TEACHER" },
+                    { new Guid("de010548-23e7-4a65-ad58-e6d5a9fd41a3"), null, "Student", "STUDENT" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RefreshToken", "RefreshTokenExpiryTime", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("78ab8f66-e864-4e65-bacb-8263595dff66"), 0, "bd1ac2b3-ecef-4fed-89cd-4891ab23ef09", "AppUser", "Admin@admin.com", true, false, null, "ADMIN@ADMIN.COM", "ADMIN", "AQAAAAIAAYagAAAAEH6j95fBX5W3/3a+gHXrmNNNzTYJMdwkANKlNixSc9IUYTovZ274QCGUJqsWmatReQ==", null, false, null, null, "", false, "Admin" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { new Guid("2751d8aa-1766-4e26-9215-eea8822cea54"), new Guid("78ab8f66-e864-4e65-bacb-8263595dff66") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Answers_Id",

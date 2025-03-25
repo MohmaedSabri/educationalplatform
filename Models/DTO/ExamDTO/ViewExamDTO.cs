@@ -12,6 +12,8 @@ public class ViewExamDTO
 
     public int DurationInMinutes {get;set;}
 
+    public string ExamToken {get;set;}
+
     public List<ViewQuestionDTO> Questions {get;set;}
 
 

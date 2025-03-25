@@ -10,7 +10,7 @@ namespace lms.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize(Roles = "Assistant")]
+[Authorize(Roles = "Assistant , Teacher")]
 public class AssistantController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -21,6 +21,22 @@ public class AssistantController : ControllerBase
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+    }
+
+    [HttpGet("Courses")]
+    public async Task<IActionResult> GetCourses(){
+        IGenericRepository<Course> courseRepository = _unitOfWork.Repository<Course>();
+        List<Course> courses = await courseRepository.GetAllAsync(include: new string[]{"Lessons"});
+        List<ViewCourseDTO> viewCourses = _mapper.Map<List<ViewCourseDTO>>(courses);
+        return Ok(viewCourses);
+    }
+
+    [HttpGet("Course/{id}")]
+    public async Task<IActionResult> GetCourse(Guid id){
+        IGenericRepository<Course> courseRepository = _unitOfWork.Repository<Course>();
+        Course course = await courseRepository.GetByIdAsync(id, include: new string[]{"Lessons"});
+        ViewCourseDTO viewCourse = _mapper.Map<ViewCourseDTO>(course);
+        return Ok(viewCourse);
     }
 
     [HttpPost("AddCourse")]
@@ -70,10 +86,11 @@ public class AssistantController : ControllerBase
         return Ok();
     }
 
-    [HttpPost("AddExam")]
-    public async Task<IActionResult> AddExam([FromBody] AddExamDTO exam){
+    [HttpPost("/Course/{id}/AddExam")]
+    public async Task<IActionResult> AddExam(Guid CourseId,[FromBody] AddExamDTO exam){
         IGenericRepository<Exam> examRepository = _unitOfWork.Repository<Exam>();
         Exam newExam = _mapper.Map<Exam>(exam);
+        newExam.CourseId = CourseId;
         await examRepository.AddAsync(newExam);
         await _unitOfWork.CommitAsync();
         return Ok(newExam.Id);
@@ -88,6 +105,7 @@ public class AssistantController : ControllerBase
         await _unitOfWork.CommitAsync();
         return Ok(newQuestion.Id);
     }
+
 
     [HttpDelete("DeleteQuestion/{questionId}")]
     public async Task<IActionResult> DeleteQuestion(Guid questionId){
